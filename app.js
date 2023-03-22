@@ -40,10 +40,16 @@ app.post("/",function(req,res){
 
     const options = {
         method:"POST",
-        auth: "victor1:b6b2471ba1d8c7ea2a3ecc3baae97d06-us11"
+        auth: "victor1:{APIKEY}"
     }
 
     const request = https.request(url,options,function(response){
+
+        if(response.statusCode === 200){
+            res.sendFile(__dirname + "/success.html");
+        }else
+        res.sendFile(__dirname + "/fail.html");
+
         response.on("data", function(data){
             console.log(JSON.parse(data));
         })
@@ -56,10 +62,7 @@ app.post("/",function(req,res){
 
 app.listen(3000, function(){
     console.log("Server running 3k");
-});
-
-//key
-//b6b2471ba1d8c7ea2a3ecc3baae97d06-us11
+})
 
 //ID
 //087a3e967f
